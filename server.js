@@ -47,16 +47,40 @@ app.post("/", (req, res) => {
 });
 
 app.get("/addmovie", (req, res)=>{
-  res.render("addmovie");
+  res.render("addmovie", {id:false});
 })
 
+app.get("/addmovie/:id", (req, res)=>{
+  Movies.findOne({ _id: req.params.id })
+    .then(foundMovie => {
+      console.log(foundMovie);
+      res.render("addmovie", {id:foundMovie} );
+    })
+    .catch(err => {
+      res.status(500).send(err);
+    });
+  
+})
+//595e95b36f82dc1c0e37d975
 app.post("/addmovie", (req, res)=>{
-  console.log(req.body);
-  var obj = req.body;
-
-  obj.actors = req.body.actors.split(',')
-  console.log(obj);
+  var obj = {"title": req.body.title,
+  "director": req.body.director,
+  "genre": req.body.genre,
+  "releaseYr": parseInt(req.body.releaseYear, 10),
+  "filmLocation": {"country": req.body.country,
+  "state_province":req.body.state_province},
+  "actors": req.body.actors.split('.')};
+  let newMovie = new Movies(obj);
+  newMovie
+    .save()
+    .then(savedMovie => {
+      res.redirect("/");
+    })
+    .catch(err => {
+      res.status(500).send(err);
+    });
 })
+
 // app.get("/arrowheads/:id", (req, res) => {
 //   Arrowhead.findById(req.params.id)
 //     .then(foundArrowhead => {

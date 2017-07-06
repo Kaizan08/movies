@@ -7,22 +7,49 @@
         <link href="./style.css" rel="stylesheet">
     </head>
     <body>
+        {{#id}}
+        <div class="addmovie">
+            <form action="/updatemovie" method="POST">
+                <input type="hidden" name="id" value="{{_id}}">
+                <label for="title">Movie Title</label>
+                <input type="text" name="title" value="{{title}}"><br>
+                <label for="director">Movie Director</label>
+                <input type="text" name="director" value="{{director}}"><br>
+                <label for="genre">Movie Genre</label>
+                <input type="text" name="genre" value="{{genre}}"><br>
+                <label for="releaseYear">Movie Released</label>
+                <input type="number" name="releaseYear" value="{{releaseYr}}"><br>
+                <label for="country">Country Filmed</label>
+                <input type="text" name="country" value="{{filmLocation.country}}"><br>
+                <label for="state_province">State/Province Filmed</label>
+                <input type="text" name="state_province" value="{{filmLocation.state_province}}"><br>
+                {{#actors}}
+                    <label for="actors">Actor Names(separated with a comma)</label>
+                    <input type="text" name="actors" value="{{.}}"><br>
+                {{/actors}}
+                <input type="submit">
+            </form>
+        {{/id}}
+        {{^id}}
         <div class="addmovie">
             <form action="/addmovie" method="POST">
                 <label for="title">Movie Title</label>
                 <input type="text" name="title"><br>
+                <label for="director">Movie Director</label>
+                <input type="text" name="director"><br>
                 <label for="genre">Movie Genre</label>
                 <input type="text" name="genre"><br>
                 <label for="releaseYear">Movie Released</label>
                 <input type="number" name="releaseYear"><br>
                 <label for="country">Country Filmed</label>
                 <input type="text" name="country"><br>
-                <label for="state">State/Province Filmed</label>
-                <input type="text" name="state"><br>
+                <label for="state_province">State/Province Filmed</label>
+                <input type="text" name="state_province"><br>
                 <label for="actors">Actor Names(separated with a comma)</label>
                 <input type="text" name="actors"><br>
                 <input type="submit">
             </form>
+        {{/id}}
         </div>
     </body>
 </html>
