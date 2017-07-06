@@ -33,19 +33,6 @@ app.get("/", (req, res) =>{
     });
 })
 
-app.post("/", (req, res) => {
-  let movie = req.body;
-  let newMovie = new Movies(movie);
-  newMovie
-    .save()
-    .then(savedMovie => {
-      res.redirect("/");
-    })
-    .catch(err => {
-      res.status(500).send(err);
-    });
-});
-
 app.get("/addmovie", (req, res)=>{
   res.render("addmovie", {id:false});
 })
@@ -61,7 +48,7 @@ app.get("/addmovie/:id", (req, res)=>{
     });
   
 })
-//595e95b36f82dc1c0e37d975
+//creating new movie
 app.post("/addmovie", (req, res)=>{
   var obj = {"title": req.body.title,
   "director": req.body.director,
@@ -70,7 +57,7 @@ app.post("/addmovie", (req, res)=>{
   "filmLocation": {"country": req.body.country,
   "state_province":req.body.state_province},
   "actors": req.body.actors.split('.')};
-  let newMovie = new Movies(obj);
+  var newMovie = new Movies(obj);
   newMovie
     .save()
     .then(savedMovie => {
@@ -81,51 +68,30 @@ app.post("/addmovie", (req, res)=>{
     });
 })
 
-// app.get("/arrowheads/:id", (req, res) => {
-//   Arrowhead.findById(req.params.id)
-//     .then(foundArrowhead => {
-//       console.log("YEAR MADE: ", foundArrowhead.yearMade);
-//       foundArrowhead.shoot();
-//       res.send(foundArrowhead);
-//     })
-//     .catch(err => {
-//       res.status(500).send(err);
-//     });
-// });
+app.post("/updatemovie", (req, res)=>{
+  var obj = {"title": req.body.title,
+  "director": req.body.director,
+  "genre": req.body.genre,
+  "releaseYr": parseInt(req.body.releaseYear, 10),
+  "filmLocation": {"country": req.body.country,
+  "state_province":req.body.state_province},
+  "actors": req.body.actors.split('.')};
+  Movies.updateOne({ _id: req.body.id }, obj).then(updatedMovie => {
+    res.redirect("/");
+  }).catch(err => {
+    res.status(500).send(err);
+  });
+});
 
-// app.post("/arrowheads", (req, res) => {
-//   let arrowheadData = req.body;
-//   let newArrowhead = new Arrowhead(arrowheadData);
-//   console.log("newArrowhead: ", newArrowhead);
-//   newArrowhead
-//     .save()
-//     .then(savedArrowhead => {
-//       res.send(savedArrowhead);
-//     })
-//     .catch(err => {
-//       res.status(500).send(err);
-//     });
-// });
-
-// app.put("/arrowheads/:id", (req, res) => {
-//   Arrowhead.updateOne({ _id: req.params.id }, req.body)
-//     .then(updatedArrowhead => {
-//       res.send(updatedArrowhead);
-//     })
-//     .catch(err => {
-//       res.status(500).send(err);
-//     });
-// });
-
-// app.delete("/arrowheads/:id", (req, res) => {
-//   Arrowhead.deleteOne({ _id: req.params.id })
-//     .then(() => {
-//       res.send("Deleted record");
-//     })
-//     .catch(err => {
-//       res.status(500).send(err);
-//     });
-// });
+app.get("/deletemovie/:id", (req, res) => {
+  Movies.deleteOne({ _id: req.params.id })
+    .then(() => {
+      res.redirect("/");
+    })
+    .catch(err => {
+      res.status(500).send(err);
+    });
+});
 
 
 
