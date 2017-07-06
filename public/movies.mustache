@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="./style.css" rel="stylesheet">
+    </head>
+    <body>
+        {{#data}}
+        <div class="table">
+            <p>{{title}}</p>
+            <p>{{genre}}</p>
+            <p>{{releaseYr}}</p>
+            <p>{{filmLocation.country}}, {{filmLocation.state_province}}</p>
+            <p>{{#actors}}{{.}} {{/actors}}</p> 
+        </div>
+        {{/data}}
+        {{^data}}
+        <div class="empty">
+            <h2>There are no movies in this collection at this time.</h2>
+            <a href="addmovie">Add a movie</a>
+        </div>
+        {{/data}}
+    </body>
+</html>

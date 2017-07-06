@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="./style.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="addmovie">
+            <form action="/addmovie" method="POST">
+                <label for="title">Movie Title</label>
+                <input type="text" name="title"><br>
+                <label for="genre">Movie Genre</label>
+                <input type="text" name="genre"><br>
+                <label for="releaseYear">Movie Released</label>
+                <input type="number" name="releaseYear"><br>
+                <label for="country">Country Filmed</label>
+                <input type="text" name="country"><br>
+                <label for="state">State/Province Filmed</label>
+                <input type="text" name="state"><br>
+                <label for="actors">Actor Names(separated with a comma)</label>
+                <input type="text" name="actors"><br>
+                <input type="submit">
+            </form>
+        </div>
+    </body>
+</html>
