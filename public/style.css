@@ -1,0 +1,21 @@
+.nav{
+    padding: 1% 0px 1% 3%;
+    border-bottom: solid 1px black;
+    width: 100%;
+    background-color: lightgray;
+}
+body{
+    width: 100%;
+    margin: 0px;
+}
+.table{
+    margin: 0px 3%;
+    display: flex;
+    justify-content: space-between;
+}
+.empty{
+    margin: 20px 3%;
+}
+.addmovie{
+    margin: 20px 3%;
+}

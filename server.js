@@ -67,7 +67,7 @@ app.post("/addmovie", (req, res)=>{
       res.status(500).send(err);
     });
 })
-
+//updating a movie using same form page
 app.post("/updatemovie", (req, res)=>{
   var obj = {"title": req.body.title,
   "director": req.body.director,

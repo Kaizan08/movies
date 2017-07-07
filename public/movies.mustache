@@ -7,13 +7,20 @@
         <link href="./style.css" rel="stylesheet">
     </head>
     <body>
+        <div class="nav">
+            <a href="/">List Movies</a>
+            <a href="/addmovie">Add a new movie</a>
+        </div>
         {{#data}}
         <div class="table">
             <p><a href="/addmovie/{{_id}}">{{title}}</a></p>
             <p>{{genre}}</p>
+            <p>{{director}}</p>
             <p>{{releaseYr}}</p>
             <p>{{filmLocation.country}}, {{filmLocation.state_province}}</p>
             <p>{{#actors}}{{.}} {{/actors}}</p> 
+            <p><a href="/addmovie/{{_id}}">Edit Movie</a></p>
+            <p><a href="/deletemovie/{{_id}}">Delete Movie</a></p>
         </div>
         {{/data}}
         {{^data}}
